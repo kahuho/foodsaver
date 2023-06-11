@@ -1,7 +1,6 @@
 """
 Base settings to build other settings files upon.
 """
-import os
 from pathlib import Path
 
 import environ
@@ -28,7 +27,7 @@ TIME_ZONE = "UCT"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 2
+SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
@@ -66,7 +65,7 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.humanize",  # Handy template tags
+    # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
 ]
@@ -78,9 +77,6 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_celery_beat",
     "webpack_loader",
-    "bootstrap5",
-    "allauth.socialaccount.providers.apple",
-    "allauth.socialaccount.providers.google",
 ]
 
 LOCAL_APPS = [
@@ -151,10 +147,7 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-# STATICFILES_DIRS = [str(APPS_DIR / "static")]
-STATICFILES_DIRS = [
-    os.path.join(APPS_DIR, "static"),
-]
+STATICFILES_DIRS = [str(APPS_DIR / "static")]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -224,8 +217,7 @@ X_FRAME_OPTIONS = "DENY"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
-    default="django.core.mail.backends.console.EmailBackend"
-    # default="django.core.mail.backends.smtp.EmailBackend",
+    default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
@@ -314,19 +306,6 @@ ACCOUNT_FORMS = {"signup": "foodie.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "foodie.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "foodie.users.forms.UserSocialSignupForm"}
-# cofiguration for Google auth provider
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "offline",
-        },
-        "OAUTH_PKCE_ENABLED": True,
-    }
-}
 
 
 # django-webpack-loader
