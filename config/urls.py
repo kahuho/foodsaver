@@ -15,6 +15,7 @@ urlpatterns = [
     # User management
     path("users/", include("foodie.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    path("products/", include("foodie.products.urls", namespace="products")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

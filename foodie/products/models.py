@@ -17,7 +17,7 @@ class Products(models.Model):
     quantity = models.IntegerField(default=1)
     image = models.ImageField(upload_to="products/", null=False, blank=False)
     pick_up_time = models.DateTimeField(null=True, blank=True)
-    location = models.PointField()
+    location = models.PointField(null=False)
     number_of_days_listed = models.IntegerField(default=14)
     published_date = models.DateTimeField(auto_now_add=True)
 
