@@ -6,7 +6,10 @@ User = get_user_model()
 
 # Create your models here.
 class Products(models.Model):
-    CATEGORY = [("f", "food"), ("nf", "non-food")]
+    CATEGORY = [
+        ("f", "food"), 
+        ("nf", "non-food"),
+        ]
 
     title = models.CharField(max_length=120)
     description = models.TextField(max_length=500)

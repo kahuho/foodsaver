@@ -1,5 +1,6 @@
 {% load static i18n %}{% load render_bundle from webpack_loader %}<!DOCTYPE html>
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -17,7 +18,7 @@
 
     {% block css %}
     <!-- Your stuff: Third-party CSS libraries go here -->
-
+    {% leaflet_css %}
     <!-- This file stores project-specific CSS -->
     {% render_bundle 'project' 'css' %}
     {% endblock %}
@@ -27,7 +28,7 @@
     {% block javascript %}
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'vendors' 'js' attrs='defer' %}
-
+      {% leaflet_js %}
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
 
