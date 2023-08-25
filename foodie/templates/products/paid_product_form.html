@@ -2,9 +2,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+{% block title %}{{ user.username }}{% endblock %}
+
 {% block content %}
-  <h1>List a free product using form below today</h1>
-  <form class="form-horizontal" method="post" action="{% url 'products:free_product_form'%}">
+  <h2>Fill in details of the product you wish to sell</h2>
+  <form class="form-horizontal" method="post" action="{% url 'products:paid_product_form'%}">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="control-group">

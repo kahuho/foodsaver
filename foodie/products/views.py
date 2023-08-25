@@ -4,25 +4,31 @@ from django.contrib.gis.db.models.functions import Distance
 
 # Django imports
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
 #Internal imports 
 from products.models import Products
-from .forms import FreeProductForm
+from .forms import FreeProductForm, PaidProductForm, RequestProductorServiceForm
 
 
-# View for uploadng free products
-class FreeProductUpload(LoginRequiredMixin, FormView):
+
+# View for form for uploadng free products
+class FreeProductUpload(LoginRequiredMixin, CreateView):
     form_class = FreeProductForm
     template_name = "products/free_stuff_upload_form.html"
     success_url = "/free_product_form/"
 
-    def form_valid(self, form):
-        latitude = form.cleaned_data['latitude']
-        longtitude = form.cleaned_data['longtitude']
-         # Create a Point object from latitude and longitude
-        user_location = Point(longtitude, latitude, srid=4326) 
-        # Example: Query your model to find nearest locations based on user input
-        nearest_locations = Products.objects.annotate(distance=Distance('location', user_location)).order_by('distance')
+#view for paid products upload 
+class PaidProductUploadForm(LoginRequiredMixin, CreateView):
+    form_class = PaidProductForm
+    template_name = "products/paid_product_form.html"
+    success_url = "/paid_product_form/"
+
+
+#Service request form
+class RequestProductorService(LoginRequiredMixin, CreateView):
+    form_class = RequestProductorServiceForm
+    template_name = "products/request_productor_service.html"
+    success_url = "/request_product_or_service_form/"
+    
+    
         
-        
-        return super().form_valid(form)

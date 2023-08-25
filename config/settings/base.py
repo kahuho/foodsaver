@@ -71,6 +71,8 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
     "django.contrib.gis",
+    'mapwidgets',
+
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -84,6 +86,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount.providers.apple",
     "allauth.socialaccount.providers.google",
     'leaflet',
+    'location_field.apps.DefaultConfig',
 ]
 
 LOCAL_APPS = [
@@ -345,3 +348,16 @@ WEBPACK_LOADER = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+GOOGLE_MAP_API_KEY = "AIzaSyD6QJFnZRniv07xKWJUfEF9ZTyy22lzVKM"
+
+MAP_WIDGETS = { 
+               "GooglePointFieldWidget": (
+                    ("zoom", 15),
+                    ("mapCenterLocationName", "Nairobi"),
+                    ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'Kenya'}}),
+                    ("markerFitZoom", 12),
+                    ("scrollWheel", False),
+                    ("streetViewControl", True),
+                 ),
+               GOOGLE_MAP_API_KEY: "AIzaSyD6QJFnZRniv07xKWJUfEF9ZTyy22lzVKM" 
+               }

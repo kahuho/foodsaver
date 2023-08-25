@@ -1,6 +1,5 @@
 from allauth.utils import get_user_model
 from django.contrib.gis.db import models
-
 User = get_user_model()
 
 
@@ -20,7 +19,7 @@ class Products(models.Model):
     quantity = models.IntegerField(default=1)
     image = models.ImageField(upload_to="products/", null=False, blank=False)
     pick_up_time = models.DateTimeField(null=True, blank=True)
-    location = models.PointField(null=False)
+    location = models.PointField(null=False, geography=True, spatial_index=True)
     number_of_days_listed = models.IntegerField(default=14)
     published_date = models.DateTimeField(auto_now_add=True)
 
